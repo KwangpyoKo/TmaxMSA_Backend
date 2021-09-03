@@ -1,0 +1,11 @@
+spring:
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    url: jdbc:postgresql://localhost:5434/msa_example_db
+    username: msa_user
+    password: msa_password
+
+  jpa:
+    hibernate:
+      ddl-auto: create
+    show-sql: true
