@@ -1,7 +1,7 @@
 package com.hr.application;
 
 
-import com.hr.application.dto.EmployeeDTO;
+import com.hr.application.dto.EmployeeResponseDTO;
 import com.hr.application.spi.EmployeePort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -15,7 +15,7 @@ public class EmployeeService {
     }
 
     @Transactional(readOnly = true)
-    public EmployeeDTO findById(String id){
+    public EmployeeResponseDTO findById(String id){
         return this.employeePort.findById(id);
     }
 

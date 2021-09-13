@@ -5,7 +5,16 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.GenericGenerator;
 
-import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import javax.persistence.Column;
+import javax.persistence.ManyToOne;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
+import javax.persistence.FetchType;
+import javax.persistence.CascadeType;
 import java.util.Set;
 
 @Getter
@@ -30,7 +39,7 @@ public class Employee{
     @OneToMany(mappedBy = "employee", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private Set<AccountInfo> accountInfoList;
 
-    public Employee(String name, Company company, Set<AccountInfo> accountInfoList) {
+    private Employee(String name, Company company, Set<AccountInfo> accountInfoList) {
         this.name = name;
         this.company = company;
         this.accountInfoList = accountInfoList;

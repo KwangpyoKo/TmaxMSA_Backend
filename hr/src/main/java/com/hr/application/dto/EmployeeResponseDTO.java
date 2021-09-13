@@ -7,26 +7,27 @@ import com.hr.adapter.persistence.Employee;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-import java.util.Set;
+import java.util.ArrayList;
+import java.util.List;
 
 @Getter
 @NoArgsConstructor
-public class EmployeeDTO {
+public class EmployeeResponseDTO {
     private String name;
     private Company company;
-    private Set<AccountInfo> accountInfo;
+    private List<AccountInfo> accountInfo;
 
-    public EmployeeDTO(String name, Company company, Set<AccountInfo> accountInfoList) {
+    private EmployeeResponseDTO(String name, Company company, List<AccountInfo> accountInfoList) {
         this.name = name;
         this.company = company;
         this.accountInfo = accountInfoList;
     }
 
-    public static EmployeeDTO from(Employee employee) {
-        return new EmployeeDTO(
+    public static EmployeeResponseDTO from(Employee employee) {
+        return new EmployeeResponseDTO(
                 employee.getName(),
                 employee.getCompany(),
-                employee.getAccountInfoList()
+                new ArrayList<>(employee.getAccountInfoList())
         );
     }
 

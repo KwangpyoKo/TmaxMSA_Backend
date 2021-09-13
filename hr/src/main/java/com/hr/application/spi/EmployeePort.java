@@ -1,7 +1,7 @@
 package com.hr.application.spi;
 
-import com.hr.application.dto.EmployeeDTO;
+import com.hr.application.dto.EmployeeResponseDTO;
 
 public interface EmployeePort {
-    EmployeeDTO findById(String id);
+    EmployeeResponseDTO findById(String id);
 }
