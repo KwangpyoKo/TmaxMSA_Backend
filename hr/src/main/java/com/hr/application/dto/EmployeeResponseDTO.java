@@ -1,6 +1,5 @@
 package com.hr.application.dto;
 
-
 import com.hr.adapter.persistence.AccountInfo;
 import com.hr.adapter.persistence.Company;
 import com.hr.adapter.persistence.Employee;

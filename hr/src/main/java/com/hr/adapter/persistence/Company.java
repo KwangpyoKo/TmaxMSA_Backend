@@ -3,11 +3,8 @@ package com.hr.adapter.persistence;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.persistence.Column;
 
@@ -15,13 +12,7 @@ import javax.persistence.Column;
 @Entity
 @NoArgsConstructor
 @Table(name = "company")
-public class Company{
-    @Id
-    @GeneratedValue(generator = "uuid")
-    @GenericGenerator(name = "uuid", strategy = "uuid")
-    @Column(name = "id", nullable = false, unique = true)
-    private String id;
-
+public class Company extends BaseEntity{
     @Column(name="name", nullable = false)
     private String name;
 }

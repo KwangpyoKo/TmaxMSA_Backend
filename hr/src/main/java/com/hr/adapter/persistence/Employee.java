@@ -3,11 +3,8 @@ package com.hr.adapter.persistence;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.persistence.Column;
 import javax.persistence.ManyToOne;
@@ -21,13 +18,7 @@ import java.util.Set;
 @Entity
 @NoArgsConstructor
 @Table(name = "employee")
-public class Employee{
-    @Id
-    @GeneratedValue(generator = "uuid")
-    @GenericGenerator(name = "uuid", strategy = "uuid")
-    @Column(name = "id", nullable = false, unique = true)
-    private String id;
-
+public class Employee extends BaseEntity{
     @Column(name="name", nullable = false)
     private String name;
 

@@ -14,13 +14,10 @@ import org.springframework.web.bind.annotation.PathVariable;
 public class EmployeeController {
     private final EmployeeService employeeService;
 
-    public EmployeeController(EmployeeService employeeService){
-        this.employeeService = employeeService;
-    }
+    public EmployeeController(EmployeeService employeeService){ this.employeeService = employeeService; }
 
     @GetMapping(value = "/{id}")
     @ResponseStatus(value = HttpStatus.OK)
-    public EmployeeResponseDTO findById(@PathVariable String id){
-        return this.employeeService.findById(id);
-    }
+    public EmployeeResponseDTO findById(@PathVariable String id){ return this.employeeService.findById(id); }
+
 }
