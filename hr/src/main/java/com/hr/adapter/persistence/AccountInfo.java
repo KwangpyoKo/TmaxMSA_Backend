@@ -17,8 +17,17 @@ public class AccountInfo extends BaseEntity{
     @Column(name = "account_number", nullable = false)
     private String accountNumber;
 
-    @ManyToOne
+    @ManyToOne(optional = false)
     @JoinColumn(name = "employee_id")
     private Employee employee;
+
+    private AccountInfo(String accountNumber, Employee employee){
+        this.accountNumber = accountNumber;
+        this.employee = employee;
+    }
+
+    public static AccountInfo create(String accountNumber, Employee employee){
+        return new AccountInfo(accountNumber,employee);
+    }
 
 }
