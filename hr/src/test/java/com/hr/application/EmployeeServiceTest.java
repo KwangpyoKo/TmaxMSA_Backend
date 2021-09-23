@@ -5,18 +5,19 @@ import com.hr.adapter.persistence.Company;
 import com.hr.adapter.persistence.Employee;
 import com.hr.application.dto.EmployeeResponseDTO;
 import com.hr.application.spi.EmployeePort;
-import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
-import java.util.Set;
-import java.util.HashSet;
 import java.util.Optional;
+import java.util.Set;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.BDDMockito.given;
+import static org.mockito.Mockito.verify;
 
 @ExtendWith(MockitoExtension.class)
 public class EmployeeServiceTest {
@@ -26,18 +27,31 @@ public class EmployeeServiceTest {
     @InjectMocks
     private EmployeeService employeeService;
 
-    @Test
-    void findEmployeeByIdSuccessfully(){
-        final Company company = Company.create("company_name");
-        final AccountInfo accountInfo = AccountInfo.create("account_number",null);
-        final Set<AccountInfo> accountInfoList = new HashSet<AccountInfo>();
-        accountInfoList.add(accountInfo);
-        final Employee employee = Employee.create("employee_id", "name",  company, accountInfoList);
-        final EmployeeResponseDTO employeeDTO = EmployeeResponseDTO.from(employee);
+    private Company company;
+    private AccountInfo accountInfo;
+    private Employee employee;
+    private EmployeeResponseDTO employeeResponse;
 
-        given(employeePort.findById(employee.getId())).willReturn(Optional.of(employeeDTO));
-        EmployeeResponseDTO findEmployee = employeeService.findById(employee.getId());
-        Assertions.assertEquals(employee.getName(),findEmployee.getName(),"Find employee by id test fail");
+    @BeforeEach
+    public void setUp(){
+        this.company = Company.from("test_company");
+        this.employee = Employee.of("employee_id", "name",  this.company);
+        this.accountInfo = AccountInfo.of("test_account", this.employee);
+        this.employee.setAccountInfoList(Set.of(accountInfo));
+        this.employeeResponse = EmployeeResponseDTO.from(this.employee);
+    }
+
+    @Test
+    void findEmployeeByIdSuccessfully() throws Exception{
+        //given
+        given(employeePort.findById(this.employee.getId())).willReturn(Optional.of(employeeResponse));
+
+        //when
+        EmployeeResponseDTO findEmployee = employeeService.findById(this.employee.getId());
+
+        //then
+        assertEquals(this.employee.getName(),findEmployee.getName(),"Find employee by id test fail");
+        verify(employeePort).findById(this.employee.getId());
     }
 
 }

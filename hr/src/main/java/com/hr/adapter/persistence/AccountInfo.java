@@ -26,7 +26,7 @@ public class AccountInfo extends BaseEntity{
         this.employee = employee;
     }
 
-    public static AccountInfo create(String accountNumber, Employee employee){
+    public static AccountInfo of(String accountNumber, Employee employee){
         return new AccountInfo(accountNumber,employee);
     }
 

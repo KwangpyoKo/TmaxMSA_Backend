@@ -3,6 +3,7 @@ package com.hr.adapter.persistence;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import javax.persistence.Entity;
 import javax.persistence.Table;
@@ -16,6 +17,7 @@ import javax.persistence.CascadeType;
 import java.util.Set;
 
 @Getter
+@Setter
 @Entity
 @NoArgsConstructor
 @Table(name = "employee")
@@ -31,24 +33,13 @@ public class Employee extends BaseEntity{
     @OneToMany(mappedBy = "employee", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private Set<AccountInfo> accountInfoList;
 
-    private Employee(String name, Company company, Set<AccountInfo> accountInfoList) {
-        this.name = name;
-        this.company = company;
-        this.accountInfoList = accountInfoList;
-    }
-
-    private Employee(String id, String name, Company company, Set<AccountInfo> accountInfoList) {
+    private Employee(String id, String name, Company company) {
         super(id);
         this.name = name;
         this.company = company;
-        this.accountInfoList = accountInfoList;
     }
 
-    public static Employee from(String name, Company company, Set<AccountInfo> accountInfo){
-        return new Employee(name,company,accountInfo);
-    }
-
-    public static Employee create(String id, String name, Company company, Set<AccountInfo> accountInfo){
-        return new Employee(id, name,company,accountInfo);
+    public static Employee of(String id, String name, Company company){
+        return new Employee(id, name,company);
     }
 }

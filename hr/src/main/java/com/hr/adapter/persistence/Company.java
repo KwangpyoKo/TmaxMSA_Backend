@@ -19,7 +19,7 @@ public class Company extends BaseEntity{
         this.name = name;
     }
 
-    public static Company create(String name){
+    public static Company from(String name){
         return new Company(name);
     }
 }
